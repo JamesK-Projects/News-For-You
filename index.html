@@ -10,12 +10,17 @@
     <header>
         <div class="header">
             <h1 class="title">News For You</h1>
-            <h2 class="description">Explore news content from around the world based on its level of bias</h2>
+            <h2 class="description">Explore news content from around the world curated just for you</h2>
         </div>
         <div class="form">
             <form>
                 <input type="text" class="js-search-bar"><br>
-                <input type="range" class="slider"><br>
+                <input type="checkbox" class="js-safe-search" id="Safe Search" value="Safe Search">
+                <label for="Safe Search">Safe Search</label><br>
+                <label for="date-from">From</label>
+                <input type="date" class="js-date" id="date-from">
+                <label for="date-to">To</label>
+                <input type="date" class="js-date" id="date-to"><br>
                 <input type="submit" class="submit">
             </form>
         </div>
