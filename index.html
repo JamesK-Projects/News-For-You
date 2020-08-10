@@ -12,22 +12,29 @@
             <h1 class="title">News For You</h1>
             <h2 class="description">Explore news content from around the world curated just for you</h2>
         </div>
+    </header>
+    <main>
         <div class="form">
             <form>
-                <input type="text" class="js-search-bar"><br>
-                <input type="checkbox" class="js-safe-search" id="Safe Search" value="Safe Search">
-                <label for="Safe Search">Safe Search</label><br>
-                <label for="date-from">From</label>
-                <input type="date" class="js-date" id="date-from">
-                <label for="date-to">To</label>
-                <input type="date" class="js-date" id="date-to"><br>
-                <input type="submit" class="submit">
+                <div class="search-bar">
+                    <input type="text" class="js-search-bar">
+                    <input type="checkbox" class="js-safe-search" id="Safe Search" value="Safe Search">
+                    <label for="Safe Search">Safe Search</label><br>
+                </div>
+                <div class="dates">
+                    <label for="date-from">From</label>
+                    <input type="date" class="js-date" id="date-from"><br>
+                    <label for="date-to">To</label>
+                    <input type="date" class="js-date" id="date-to"><br>
+                </div>
+                <div class="submit">
+                    <input type="submit" class="submit">
+                </div>
             </form>
         </div>
         <div class="js-news-results">
         </div>
-    </header>
-
+    </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="index.js"></script>
