@@ -12,17 +12,17 @@ var pageSize = 20;
 function displayNewsResults(responseJson, pageSize){
     console.log(responseJson);
     console.log(pageSize);
-    $('.js-news-results').append('<div class="section-title"><h2>Read all about it:</h2></div>')
+    $('.js-news-results').append('<div class="section-title"><h3>Read all about it:</h3></div>')
     for (var i = 0; i < pageSize; i++){
         if ((responseJson.value[i].image.url) !== null && (responseJson.value[i].image.url) !==""){
             $('.js-news-results').append(`
-                <div class="results">
+                <div class="results item">
                     <a href="${responseJson.value[i].url}" target="_blank">
-                        <h2 class="article-title">${responseJson.value[i].title}</h2>
+                        <h3 class="article-title">${responseJson.value[i].title}</h3>
                     </a>
                     <h4>source: ${responseJson.value[i].provider.name}</h4>
                     <a href="${responseJson.value[i].url}" target="_blank">
-                        <img src="${responseJson.value[i].image.url}" width="300px">
+                        <img class="article-image" src="${responseJson.value[i].image.url}">
                     </a>
                     <p class="description">${responseJson.value[i].description}</p>
                     <hr>
@@ -34,15 +34,15 @@ function displayNewsResults(responseJson, pageSize){
 
 function displayYoutubeResults(responseJson){
     console.log(responseJson);
-    $('.js-youtube-results').append('<div class="section-title"><h2>Watch related videos:</h2></div>')
+    $('.js-youtube-results').append('<div class="section-title"><h3>Watch related videos:</h3></div>')
     for (var i = 0; i < 20; i++){
         $('.js-youtube-results').append(`
-            <div class="results">
+            <div class="results item">
                 <a href="https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}" target="_blank">
-                    <h2 class="video-title">${responseJson.items[i].snippet.title}</h2>
+                    <h3 class="video-title">${responseJson.items[i].snippet.title}</h3>
                 </a>
                 <h4>source: ${responseJson.items[i].snippet.channelTitle}</h4>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="250" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p class="description">${responseJson.items[i].snippet.description}</p>
                 <hr>
             </div>
@@ -109,7 +109,7 @@ function getVideos(query, fromPublishedDate, toPublishedDate){
         "part": "snippet",
         "type": "video",
         "videoCategoryId": 25,
-        "maxResults": 20,
+        "maxResults": 15,
         "publishedAfter": fromPublishedDate + 'T00:00:00Z',
         "publishedBefore": toPublishedDate + 'T23:59:59Z'
     }
