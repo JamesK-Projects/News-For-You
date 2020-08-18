@@ -12,7 +12,6 @@ var pageSize = 20;
 function displayNewsResults(responseJson, pageSize){
     console.log(responseJson);
     console.log(pageSize);
-    $('.js-news-results').append('<div class="section-title"><h3>Read all about it:</h3></div>')
     for (var i = 0; i < pageSize; i++){
         if ((responseJson.value[i].image.url) !== null && (responseJson.value[i].image.url) !==""){
             $('.js-news-results').append(`
@@ -34,7 +33,6 @@ function displayNewsResults(responseJson, pageSize){
 
 function displayYoutubeResults(responseJson){
     console.log(responseJson);
-    $('.js-youtube-results').append('<div class="section-title"><h3>Watch related videos:</h3></div>')
     for (var i = 0; i < 20; i++){
         $('.js-youtube-results').append(`
             <div class="results item">
@@ -45,8 +43,7 @@ function displayYoutubeResults(responseJson){
                 <iframe width="560" height="250" src="https://www.youtube.com/embed/${responseJson.items[i].id.videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p class="description">${responseJson.items[i].snippet.description}</p>
                 <hr>
-            </div>
-                
+            </div>      
         `)
     }
 }
@@ -81,6 +78,7 @@ function getNews(query, fromPublishedDate, toPublishedDate){
     fetch(url, options)
         .then(response => { 
             $('.loader').addClass('hidden');
+            $('.news-section-title').removeClass('hidden');
             if(response.ok){
                 return response.json();
             }
@@ -113,11 +111,13 @@ function getVideos(query, fromPublishedDate, toPublishedDate){
         "publishedAfter": fromPublishedDate + 'T00:00:00Z',
         "publishedBefore": toPublishedDate + 'T23:59:59Z'
     }
+    
     const queryString = formatQueryParams(params);
     const url = youtubeUrl + '?' + queryString;
 
     fetch(url)
         .then(response => {
+            $('.video-section-title').removeClass('hidden');
             if(response.ok){
                 return response.json();
             }
@@ -130,7 +130,7 @@ function getVideos(query, fromPublishedDate, toPublishedDate){
 }
 
 function watchForm(){
-    $('form').submit(event => {
+    $('button').click(function() {
         event.preventDefault();
         $('.js-youtube-results').empty();
         $('.js-news-results').empty();
@@ -143,21 +143,5 @@ function watchForm(){
         getVideos(searchTerm, fromPublishedDate, toPublishedDate);
     })
 }
-
-// Infinite scroll function. TBD if will use
-
-// $(window).scroll(function infiniteScroll() {
-//         if ($(document).height() - $(this).height() == $(this).scrollTop()) {
-//             //alert('scrolled to bottom')
-//             itemNumber += 20;
-//             pageSize += 20;
-//             console.log(itemNumber)
-//             const searchTerm = $('.js-search-bar').val();
-//             const safeSearch = $('.js-safe-search').prop("checked");
-//             const fromPublishedDate = $('#date-from').val();
-//             const toPublishedDate = $('#date-to').val();
-//             getNews(searchTerm, safeSearch, fromPublishedDate, toPublishedDate);
-//         }
-//  });
 
 $(watchForm);

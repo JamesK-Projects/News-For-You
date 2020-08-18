@@ -20,24 +20,31 @@
                 <div class="search-bar">
                     <input type="text" class="js-search-bar" id="js-search-bar" aria-label="Search" placeholder="Search" required>
                 </div>
-                <div class="dates">
+                <div class="dates group">
                     <label for="date-from">From</label>
                     <input type="date" class="js-date" id="date-from"><br>
                     <label for="date-to">To</label>
                     <input type="date" class="js-date" id="date-to"><br>
                 </div>
-                <div class="submit">
-                    <a href="results">
-                        <input type="submit" class="submit">
-                    </a>
+                <div class="submit-button">
+                    <button type="button" class="submit">Submit</button>
                 </div>
             </form>
         </div>
 
         <div class="results" id="results">
-            <div class="js-youtube-results group">
+            <div class="youtube-results">
+                <div class="section-title hidden"><h3>Watch related videos:</h3>
+                </div>
+                <div class="js-youtube-results group">
+                </div>
             </div>
-            <div class="js-news-results group">
+
+            <div class="news-results">
+                <div class="news-section-title hidden"><h3>Read all about it:</h3>
+                </div>
+                <div class="js-news-results group">
+                </div>
             </div>
         </div>
         
