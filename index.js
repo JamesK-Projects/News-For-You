@@ -9,6 +9,7 @@ const youtubeUrl = "https://www.googleapis.com/youtube/v3/search"
 var itemNumber = 1;
 var pageSize = 20;
 
+// displays the news articles in the DOM
 function displayNewsResults(responseJson, pageSize){
     console.log(responseJson);
     console.log(pageSize);
@@ -31,8 +32,8 @@ function displayNewsResults(responseJson, pageSize){
     }
 }
 
+// displays the youtube videos in the DOM
 function displayYoutubeResults(responseJson){
-    console.log(responseJson);
     for (var i = 0; i < 20; i++){
         $('.js-youtube-results').append(`
             <div class="results item">
@@ -48,11 +49,13 @@ function displayYoutubeResults(responseJson){
     }
 }
 
+// converts the query parameters into the proper format to be added to the URL
 function formatQueryParams(params){
     const queryItems = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
     return queryItems.join('&');
 }
 
+// retrieves the news articles from the contextual web search API
 function getNews(query, fromPublishedDate, toPublishedDate){
     $('.loader').removeClass('hidden');
     var params = {
@@ -73,7 +76,6 @@ function getNews(query, fromPublishedDate, toPublishedDate){
 
     const queryString = formatQueryParams(params);
     const url = searchUrl + '?' + queryString;
-    console.log(url);
 
     fetch(url, options)
         .then(response => { 
@@ -90,6 +92,7 @@ function getNews(query, fromPublishedDate, toPublishedDate){
         });
 }
 
+// retrieves the news videos from the Youtube API
 function getVideos(query, fromPublishedDate, toPublishedDate){
     var today = new Date();
     if (fromPublishedDate === ''){
@@ -100,7 +103,6 @@ function getVideos(query, fromPublishedDate, toPublishedDate){
         toPublishedDate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
     }
 
-    console.log("from" + fromPublishedDate + "to" + toPublishedDate);
     var params = {
         "q": query,
         "key": keyYoutube,
@@ -111,14 +113,14 @@ function getVideos(query, fromPublishedDate, toPublishedDate){
         "publishedAfter": fromPublishedDate + 'T00:00:00Z',
         "publishedBefore": toPublishedDate + 'T23:59:59Z'
     }
-    
+
     const queryString = formatQueryParams(params);
     const url = youtubeUrl + '?' + queryString;
 
     fetch(url)
         .then(response => {
-            $('.video-section-title').removeClass('hidden');
             if(response.ok){
+                $('.video-section-title').removeClass('hidden');
                 return response.json();
             }
             throw new Error(response.statusText);
@@ -129,6 +131,7 @@ function getVideos(query, fromPublishedDate, toPublishedDate){
         })
 }
 
+// runs the getNews and getVideos functions when the submit button is clicked
 function watchForm(){
     $('button').click(function() {
         event.preventDefault();
@@ -137,8 +140,6 @@ function watchForm(){
         const searchTerm = $('.js-search-bar').val();
         const fromPublishedDate = $('#date-from').val();
         const toPublishedDate = $('#date-to').val();
-        console.log("form was submitted");
-        console.log($('#date-from').val());
         getNews(searchTerm, fromPublishedDate, toPublishedDate);
         getVideos(searchTerm, fromPublishedDate, toPublishedDate);
     })

@@ -1,6 +1,5 @@
 *{
     box-sizing: border-box;
-    
 }
 
 body{
@@ -51,7 +50,7 @@ button:hover{
     cursor: pointer;
 }
 
-h2, .dates, .description{
+h2, .dates, .description, .js-date{
     font-family: 'Lato', sans-serif;
 }
 
@@ -59,12 +58,11 @@ h2, .dates, .description{
     margin-bottom: 5px;
 }
 
-.js-date{
-    font-family: 'Lato', sans-serif;
+.js-date, .js-search-bar{
     color: rgb(99, 97, 97);
 }
 
-h1, .intro, .search-bar, .dates, button{
+h1, .intro, .search-bar, .dates, button, .news-section-title, .video-section-title{
     text-align: center;
     color: #113f67;
 }
@@ -81,18 +79,15 @@ h2{
     width: 300px;
     height: 30px;
     font-size: 18px;
-    color: rgb(99, 97, 97);
     text-align: center;
 }
 
 .news-section-title, .video-section-title{
     font-family: 'Playfair Display', serif;
-    text-align: center;
     padding-top: 5px;
-    color: #113f67;
 }
 
-.article-title{
+.article-title, .video-title{
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;                  
@@ -106,7 +101,6 @@ hr{
     border-right: none;
     border-bottom: none;
     width: 30%;
-    
 }
 
 a{
@@ -212,12 +206,13 @@ iframe, .article-image{
     }
 }
 
-/* desktop view */
+/* for desktop view */
 
-@media all and (min-width: 900px){
+@media all and (min-width: 1000px){
     .item{
         margin: 20px;
-        width: 25%;
+        width: 28%;
+        
     }
 }
 
