@@ -6,7 +6,7 @@ News For You is an app that quickly searches for news articles and videos for yo
 Click [here](https://jamesk-projects.github.io/News-For-You/) for link to live app.
 
 ## Screenshots
-Home page with search bar and date entry:
+Home page with search bar and date entry:   
 ![home screen](screenshots/home-screen.jpg)
 
 
